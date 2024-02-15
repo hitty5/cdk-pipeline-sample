@@ -1,14 +1,32 @@
-# Welcome to your CDK TypeScript project
+# CDK Pipelines Sample
 
-This is a blank project for CDK development with TypeScript.
+Contains sample pipeline to demonstrate the usage of CDK pipelines. The sample pipeline requires one account as the
+deployment account hosting the CDK pipeline and one account has the target account where the stack resources get
+deployed to.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## Bootstrap
 
-## Useful commands
+First you need to boostrap your accounts.
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `npx cdk deploy`  deploy this stack to your default AWS account/region
-* `npx cdk diff`    compare deployed stack with current state
-* `npx cdk synth`   emits the synthesized CloudFormation template
+For the deployment account
+
+```bash
+npx cdk bootstrap aws://$DEPLOY_ACC/$REGION  \
+    --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess
+```
+
+For the target account
+
+```bash
+npx cdk bootstrap aws://$TARGET_ACC/$REGION \
+    --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess \
+    --trust $DEPLOY_ACC
+```
+
+## Deploy CDK pipeline
+
+Assume role of deployment account first.
+
+```bash
+cdk deploy
+```
