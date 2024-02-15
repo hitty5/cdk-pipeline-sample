@@ -6,6 +6,6 @@ export class BucketStage extends Stage {
     constructor(scope: Construct, id: string, props: StageProps) {
         super(scope, id, props);
 
-        new BucketStack(this, 'BitbucketStack', props);
+        const bucketStack = new BucketStack(this, 'BitbucketStack', props);
     }
 }

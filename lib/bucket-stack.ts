@@ -7,8 +7,8 @@ export class BucketStack extends Stack {
     constructor(scope: Construct, id: string, props?: StackProps) {
         super(scope, id, props);
 
-        /*new s3.Bucket(this, "MyBucket", {
+        new s3.Bucket(this, "MyBucket", {
             bucketName: "my-new-cdk-sample-demo-bucket",
-        });*/
+        });
     }
 }
